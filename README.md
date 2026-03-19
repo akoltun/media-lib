@@ -1,6 +1,8 @@
 # Setup/bootstrap-репозиторий для курса AI driven development
 
-Этот репозиторий создан для [курса Данила Письменного на Thinknetica](https://thinknetica.com/ai/ai_swe_course?utm_source=telegram&utm_medium=post&utm_campaign=ai_swe_course&utm_content=dpismenny).
+![AI setup meme](https://i.programmerhumor.io/2025/07/9d40116f39da7b5d83f41899584b86c9c21d5c750c6330ff88d46532ecfb8d59.png)
+
+Этот репозиторий создан для [курса Данила Письменного по ai-driven-development на Thinknetica](https://thinknetica.com/ai/ai_swe_course?utm_source=telegram&utm_medium=post&utm_campaign=ai_swe_course&utm_content=dpismenny).
 
 В первую очередь это базовый setup/bootstrap-репозиторий для окружения и агентских инструментов. Во вторую очередь это шаблон, из которого можно стартовать учебный проект.
 
