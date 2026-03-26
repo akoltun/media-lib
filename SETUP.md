@@ -77,6 +77,7 @@ make check
 | [@playwright/cli](https://github.com/microsoft/playwright-cli) | Автоматизация работы с сайтами и тестирование веба | Попросить агента зайти на сайт и сделать скриншот |
 | [gh](https://github.com/cli/cli) | Работа с GitHub API за пределами `git`: просмотр и создание issue, pull request, projects | Попросить агента посмотреть или создать issue в репозитории |
 | [port-selector](https://github.com/dapi/port-selector) | Автоматический выбор свободного порта из диапазона для локальных dev-серверов и e2e при параллельной работе агентов | Выполнить `port-selector` и убедиться, что команда возвращает номер свободного порта |
+| [ccbox](https://github.com/diskd-ai/ccbox) | Инспекция и анализ кодовой базы для агентов | Выполнить `ccbox --version` |
 
 Опциональные (ставятся через `make extra-skills`):
 
@@ -102,7 +103,9 @@ make check
 
 Эти skills ставятся для `codex` и `claude-code`:
 
-`tgcli`, `playwright-cli`, `prompt-engeneering`, `gws-docs`, `gws-docs-write`, `gws-drive`, `gws-sheets`.
+`playwright-cli`, `prompt-engeneering`, `ccbox`, `ccbox-insights`.
+
+Через `make extra-skills` дополнительно: `tgcli`, `gws-docs`, `gws-docs-write`, `gws-drive`, `gws-sheets`.
 
 ### Plugins для Claude Code
 

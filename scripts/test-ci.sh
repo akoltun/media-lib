@@ -84,5 +84,6 @@ section "Agent CLIs"
 check_mise "claude installed" claude --version
 check_mise "codex installed" codex --version
 check_mise "playwright-cli installed" playwright-cli --version
+check_direct "ccbox installed" ccbox --version
 
 printf '\nCI smoke checks passed.\n'

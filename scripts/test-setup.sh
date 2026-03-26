@@ -285,6 +285,7 @@ section "Agent CLIs (required)"
 check_command required "claude installed" claude --version
 check_command required "codex installed" codex --version
 check_command required "playwright-cli installed" playwright-cli --version
+check_command required "ccbox installed" ccbox --version
 section "Account-backed tools"
 check_json_command required "claude authenticated" '.loggedIn == true' claude auth status --json
 check_command required "codex authenticated" codex login status
