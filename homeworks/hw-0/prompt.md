@@ -17,3 +17,36 @@ Add corresponding script to `package.json` according the Key commands.
 Document the installed dependency in the `README.md`.
 
 Use context7 MCP.
+
+# PROMPT 4. Replace example app with more simple one
+You are a principal FullStack TypeScript developer.
+
+Replace example appliction with the simple one that has only one home page.
+Home page shows phrase "Hello, <appeal>!".
+In order to get <appeal> send a request to BE: `GET /api/appeal`
+This endpoint should return JSON: `{ "appeal": "World" }`
+Delete old files from `src` that are not needed for the new application.
+Arrange according to *Project Structure* in `CLAUDE.md`.
+
+Check that the application compiles successfully. Fix any compilation errors.
+
+# PROMPT 4-fix-1. Replace example app with more simple one
+You are a principal FullStack TypeScript developer.
+
+Replace example appliction with the simple one that has only one home page.
+Home page shows phrase "Hello, <appeal>!".
+In order to get <appeal> home page sends a request to BE: `GET /api/appeal`.
+This endpoint returns JSON: `{ "appeal": "World" }`
+
+Create home page domain, and put all home page related code there.
+
+Delete old files from `src` that are not needed for the new application.
+Arrange according to *Project Structure* in `CLAUDE.md`.
+
+Check that the application compiles successfully. Fix any compilation errors. Don't ignore deprecated compiler options, instead delete or replace them.
+
+# PROMPT 5. Check that appliction works and fix error
+You are a principal FullStack TypeScript developer.
+
+Check that application works by running it in dev mode, and sending the request to load home page via `curl`.
+Fix errors if any.

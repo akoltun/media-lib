@@ -17,7 +17,44 @@ In short: it's an AI coding assistant guardrail, not a developer-facing conventi
 Looks like, it is not Claude but Bun who created it. Which is weird in a way because Anthropic is contributing a lot in Bun codebase, and using it a lot, so it could create something for Claude Code, not only for Cursor.
 
 # PROMPT 3. Install Typescript dependency
+## Method of checking
+- `git diff`
 ## Positive
 - Installed the dependency
 ## Negative
 - Performed couple of calls to `bun pm info typescript@latest version 2>/dev/null || npm show typescript version` instead of directly install the last version with `bun install typescript@latest`
+
+# PROMPT 4. Replace example app with more simple one
+## Method of checking
+- `git diff`
+## Positive
+- Created working application according the prompt
+## Negative
+- It placed the home page component in `app/home` folder, although according the Project Structure it should be placed to `domains/home` folder
+- Instead of fixing TS error caused by deprecating of some old parameters by new version of TypeScript, it added a directive to ignore deprecations.
+## My action
+- make project structure more precise, correct the prompt and rerun it
+
+# PROMPT 4-fix-1. Replace example app with more simple one
+## Method of checking
+- `git diff`
+- `bun dev`
+## Positive
+- It generated correct application structure exactly as expected
+- It correctly fixed TypeScript deprecation error
+- It checked that application compiles successfully
+## Negative
+- There is error running the application because I didn't request to test it since Playwright is not installed yet
+## My action
+- Actually it can be tested with simple `curl` request and parsing of responded html, so I will ask it in the next prompt
+
+# PROMPT 5. Check that appliction works and fix error
+## Method of checking
+- `git diff`
+- `bun dev`
+## Positive
+- It debugged and fixed the issue
+- It also renamed the title in the `html` file :)
+## Negative
+- It didn't stop the server after testing, and it run it as independent process, so it was not closed when I exited Claude. So I had to kill the process from terminal.
+- I have impression that it doesn't really use context7 MCP if I don't explicitly ask it in the prompt, even though it is said in the `CLAUDE.md` file
