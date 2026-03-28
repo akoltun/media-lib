@@ -15,3 +15,9 @@ bun init --react generated this rule specifically to guide the Cursor AI assista
 In short: it's an AI coding assistant guardrail, not a developer-facing convention document. Bun includes it automatically because Cursor is a popular IDE and without this rule the AI inside it would likely suggest npm install, vite, express, jest, etc. — all of which have Bun-native replacements.  
 ## Positive
 Looks like, it is not Claude but Bun who created it. Which is weird in a way because Anthropic is contributing a lot in Bun codebase, and using it a lot, so it could create something for Claude Code, not only for Cursor.
+
+# PROMPT 3. Install Typescript dependency
+## Positive
+- Installed the dependency
+## Negative
+- Performed couple of calls to `bun pm info typescript@latest version 2>/dev/null || npm show typescript version` instead of directly install the last version with `bun install typescript@latest`

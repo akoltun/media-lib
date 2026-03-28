@@ -35,6 +35,7 @@ bun init --react
 **Dependencies installed:**
 - `react@^19` + `react-dom@^19` — UI framework (from stack)
 - `@types/react@^19` + `@types/react-dom@^19` + `@types/bun` — TypeScript types
+- `typescript@^6.0.2` — TypeScript compiler (`tsc`)
 
 ### Install dependencies
 

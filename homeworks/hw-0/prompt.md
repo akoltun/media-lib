@@ -8,3 +8,12 @@ Document the installation process and all choices in the `README.md` file.
 
 # PROMPT 2. Clarify the reason for creation of cursor rules
 What is the reason to create a Cursor rule on the previous step?
+
+# PROMPT 3. Install Typescript dependency
+You are a principal FullStack developer.
+
+Install latest TypeScript. 
+Add corresponding script to `package.json` according the Key commands.
+Document the installed dependency in the `README.md`.
+
+Use context7 MCP.
