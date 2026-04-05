@@ -170,3 +170,9 @@ Adjust the Brief in accord with the following answers for those questions:
 ### Prompt #29 (в сессии Prompt-а #27)
 Примени предложенные исправления.
 По Замечанию 2, используй вариант с примечанием
+
+## Correction of Spec and Plan
+### Prompt #30
+Скорректируй Spec `memory-bank/features/001/spec.md` и Plan `memory-bank/features/001/plan.md`.
+
+Помимо oxlint и oxfmt, необходимо также установить пакет oxlint-tsgolint. Он нужен для работе type-aware линтера.

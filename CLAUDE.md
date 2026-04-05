@@ -1,13 +1,15 @@
 See PROJECT.md for project description.
 
 ## Stack
+
 - TypeScript 6
 - FE: React 19, MUI 7, MUI X 8, ReactRouter 7
 - BE: Bun, Drizzle, PostgreSQL
 - Linter & Formatter: Oxlint, Oxfmt
-- Tests: Playwright 
+- Tests: Playwright
 
 ## Key commands
+
 - `bun run build` - build a production binary
 - `bun run compile` - compile a project with TypeScript (without emitting JS code)
 - `bun run db:console` - run psql console
@@ -20,6 +22,7 @@ See PROJECT.md for project description.
 - `bun run test` - run tests
 
 ## Conventions
+
 - Bun Dev Server, Bun Bundler, Bun Package Manager
 - Drizzle codebase first approach without creation of sql migration files
 - Drizzle ORM connects to PostgreSQL DB via Bun SQL module
@@ -33,7 +36,8 @@ See PROJECT.md for project description.
 - kebab-case for file and folder names
 - 2 spaces indention
 - Each file has only one exported function or class, use named export. It can have additional exported type(s) and/or interface(s)
-- Each React component has corresponding props interface. Example: 
+- Each React component with props has corresponding props interface. Example:
+
 ```typescript
 export interface ButtonProps {
   color: string
@@ -41,10 +45,18 @@ export interface ButtonProps {
 }
 export const Button = ({ color, children }) => <Btn color={color}>{children}</Btn>
 ```
+
+- React component without props doesn't have props interface. Example:
+
+```typescript
+export const Warning = () => <p>Warning</p>
+```
+
 - All api endpoints starts with `/api`
 - Use Russian for all Brief (`Brief.md`), Spec (`Spec.md`) and Plan (`Plan.md`) documents
 
 ## Project Structure
+
 - `src` - source code of the application
   - `index.ts` - server (BE) entrypoint
   - `index.html` - SPA html
@@ -61,7 +73,7 @@ export const Button = ({ color, children }) => <Btn color={color}>{children}</Bt
     - `<complex-domain-name>` - folder that contains subdomains of a complex domain
       - `<subdomain-name>` - folder that contains all subdomain files (complex subdomains can be composed from sub-sub-domain; the level of nesting depends on the level of domain/subdomain complexity)
         - `api.ts` - file exports `<subdomainName>Api` object that describes all endpoints that belongs to this domain: `{ "/api/<complex-domain-name>/<subdomain-name>": { GET(), POST(), etc.  }}`
-        - `api.test.ts` - tests for all endpoints from `api.ts` from the same folder        
+        - `api.test.ts` - tests for all endpoints from `api.ts` from the same folder
         - `<subdomain-name>.tsx` - React component that renders this subdomain page
         - `components`, `ui`, `utils` - if subdomain is not complex enough to have own subdomains, but not simple enough to fit in one file, it can be split into components, ui and utils if necessary
       - `components`, `ui`, `utils` - few subdomains can share common components, ui and utils if necessary
@@ -76,6 +88,7 @@ If `components`, `ui` or `utils` has to be used by few subdomains they are place
 If `components`, `ui` or `utils` has to be used by few domains they are placed in the "root" corresponding folders: `src/components`, `src/ui`, `src/utils`.
 
 ### `components` vs `ui`
+
 - `ui` - simple React components that either don't have state, or have only ui related state, ex. pressed/unpressed button
 - `components` - React components that have business logic related state, ex. search component
 
@@ -83,7 +96,17 @@ If `components`, `ui` or `utils` has to be used by few domains they are placed i
 - otherwise they are placed in the lowers common domain/subdomain folder.
 
 ## Constraints
+
 No new dependencies without explicit request
+Don't change following files (unless directly specified in the spec):
+
+- `CLAUDE.md`
+- `oxfmt.config.ts`
+- `oxlint.config.ts`
+- `package.json`
+- `PROJECT.md`
+- `tsconfig.json`
 
 ## Requirements
+
 The app supports latest version of Chrome. It is to be used in Playwright tests.

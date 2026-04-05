@@ -18,13 +18,14 @@
 
 ### 1. Установка зависимостей
 
-Добавить `oxlint` и `oxfmt` в `devDependencies`:
+Добавить `oxlint`, `oxfmt` и `oxlint-tsgolint` в `devDependencies`:
 
 ```bash
-bun add -d oxlint oxfmt
+bun add -d oxlint oxfmt oxlint-tsgolint
 ```
 
-Плагины `import`, `promise`, `typescript`, `react` и `vitest` встроены в `oxlint` и не требуют отдельной установки.
+- `oxlint-tsgolint` — обязательный пакет для работы type-aware линтера; без него линтер будет падать при запуске
+- Плагины `import`, `promise`, `typescript`, `react` и `vitest` встроены в `oxlint` и не требуют отдельной установки
 
 ### 2. Конфигурация Oxlint
 
@@ -50,6 +51,10 @@ export default defineConfig({
   globals: {},
   plugins: ["import", "promise", "typescript"],
   rules: {
+    "eslint/sort-imports": "off",
+    "import/no-named-export": "off",
+    "import/prefer-default-export": "off",
+    "no-duplicate-imports": ["error", { allowSeparateTypeImports: true }],
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
     "typescript/await-thenable": "error",
@@ -73,6 +78,9 @@ export default defineConfig({
     {
       files: ["src/**/*.tsx", "src/**/*.jsx"],
       plugins: ["react"],
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
     },
     {
       files: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
@@ -84,11 +92,12 @@ export default defineConfig({
 
 - Охватываемые расширения: `.js`, `.mjs`, `.cjs`, `.ts`, `.mts`, `.cts`, `.jsx`, `.tsx`
 - Oxlint обнаруживает эти файлы автоматически; явное перечисление расширений не требуется
-- `options.typeAware: true` — включает type-aware режим: Oxlint читает `tsconfig.json` и использует информацию о типах TypeScript при анализе
+- `options.typeAware: true` — включает type-aware режим: Oxlint читает `tsconfig.json` и использует информацию о типах TypeScript при анализе; требует установленного пакета `oxlint-tsgolint`
 - Плагины `import`, `promise` и `typescript` применяются глобально
 - Плагин `react` применяется только к TSX/JSX файлам фронтенда (`src/**/*.tsx`, `src/**/*.jsx`)
 - Плагин `vitest` применяется только к тестовым файлам внутри `src/` (`*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`) — Oxlint-плагин `vitest` распознаёт паттерны Bun Test Runner (`describe`/`it`/`expect`); установка пакета `vitest` не требуется
 - Type-aware правила в секции `rules` проверяют корректность работы с асинхронным кодом, небезопасными операциями и излишними конструкциями, требующими знания типов
+- eslint/sort-imports не применяется, поскольку сортировка импортов осуществляется форматтером
 
 ### 3. Конфигурация Oxfmt
 
@@ -145,7 +154,7 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 | Файл | Действие |
 |------|----------|
-| `package.json` | Добавить скрипт `lint`, добавить `oxlint` и `oxfmt` в `devDependencies` |
+| `package.json` | Добавить скрипт `lint`, добавить `oxlint`, `oxfmt` и `oxlint-tsgolint` в `devDependencies` |
 | `oxlint.config.ts` | Создать — конфигурация Oxlint |
 | `oxfmt.config.ts` | Создать — конфигурация Oxfmt |
 
@@ -153,7 +162,7 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 ## Критерии приёмки (проверка)
 
-0. `bun add -d oxlint oxfmt` завершается с кодом выхода `0` и пакеты присутствуют в `devDependencies` в `package.json`
+0. `bun add -d oxlint oxfmt oxlint-tsgolint` завершается с кодом выхода `0` и все три пакета присутствуют в `devDependencies` в `package.json`
 1. `bun run lint` завершается с кодом выхода `0` на файлах проекта
 2. После выполнения `bun run lint` команда `oxfmt --check` завершается с кодом выхода `0` (нет файлов с несоответствиями форматированию)
 3. Файлы `oxlint.config.ts` и `oxfmt.config.ts` существуют в корне проекта и содержат конфигурацию из спеки
@@ -163,7 +172,7 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 ## Сценарии ошибок
 
-- Если `bun add -d oxlint oxfmt` завершается с ненулевым кодом — остановить выполнение, сообщить об ошибке. Дальнейшие шаги не выполнять.
+- Если `bun add -d oxlint oxfmt oxlint-tsgolint` завершается с ненулевым кодом — остановить выполнение, сообщить об ошибке. Дальнейшие шаги не выполнять.
 - Если `oxlint --fix` завершается с ненулевым кодом — это ожидаемое поведение при наличии неисправимых нарушений. Перейти к шагу 5 (редактирование исходных файлов), не останавливая выполнение.
 - Если `oxfmt --write` завершается с ненулевым кодом — вывести список файлов с ошибками форматирования, остановить выполнение. Не продолжать.
 - Если после всех допустимых исправлений в `src/` и `tests/` (см. шаг 5) `oxlint` всё ещё завершается с ненулевым кодом — остановить выполнение, вывести список неисправленных нарушений. Не продолжать и не изменять бизнес-логику.
@@ -182,7 +191,7 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 ## Ограничения на реализацию
 
-- Добавляются ровно две зависимости: `oxlint` и `oxfmt`
+- Добавляются ровно три зависимости: `oxlint`, `oxfmt` и `oxlint-tsgolint`
 - `tsconfig.json` не изменяется; Oxlint находит его автоматически
 - `package.json` изменяется только в части `devDependencies` и `scripts`
 - Изменения в `src/` и `tests/` файлах ограничены исправлением нарушений Oxlint (шаг 5)
@@ -192,7 +201,7 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 ## In scope
 
-- Установка `oxlint` и `oxfmt` как `devDependencies`
+- Установка `oxlint`, `oxfmt` и `oxlint-tsgolint` как `devDependencies`
 - Создание `oxlint.config.ts` с конфигурацией из спеки
 - Создание `oxfmt.config.ts` с конфигурацией из спеки
 - Добавление скрипта `lint` в `package.json`
