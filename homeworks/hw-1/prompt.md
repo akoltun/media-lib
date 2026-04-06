@@ -221,3 +221,8 @@ Adjust the Brief in accord with the following answers for those questions:
 
 ### Prompt #37
 примени исправления, не создавай Spec.md
+
+## Spec
+### Prompt #38
+Ты работаешь по SDD.
+Прочитай Brief из `memory-bank/features/002/brief.md` и сгенерируй Spec в `memory-bank/features/002/spec.md`.
