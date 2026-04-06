@@ -18,9 +18,12 @@ export default defineConfig({
   plugins: ["import", "promise", "typescript"],
   rules: {
     "eslint/sort-imports": "off",
+    "import/exports-last": "off",
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",
+    "init-declarations": "off",
     "no-duplicate-imports": ["error", { allowSeparateTypeImports: true }],
+    "no-magic-numbers": "off",
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
     "typescript/await-thenable": "error",
@@ -47,6 +50,9 @@ export default defineConfig({
     {
       files: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
       plugins: ["vitest"],
+      rules: {
+        "typescript/no-unsafe-assignment": "off",
+      },
     },
   ],
 });
