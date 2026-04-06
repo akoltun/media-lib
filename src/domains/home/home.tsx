@@ -1,19 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 interface AppealResponse {
-  appeal: string
+  appeal: string;
 }
+
+const isAppealResponse = (data: unknown): data is AppealResponse =>
+  typeof data === "object" &&
+  data !== null &&
+  "appeal" in data &&
+  typeof (data as Record<string, unknown>).appeal === "string";
 
 export const Home = () => {
-  const [appeal, setAppeal] = useState<string | null>(null)
+  const [appeal, setAppeal] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/appeal")
-      .then(res => res.json() as Promise<AppealResponse>)
-      .then(data => setAppeal(data.appeal))
-  }, [])
+    const fetchData = async () => {
+      const res = await fetch("/api/appeal");
+      const raw: unknown = await res.json();
+      if (!isAppealResponse(raw)) {
+        throw new Error("Invalid response");
+      }
+      setAppeal(raw.appeal);
+    };
+    void fetchData();
+  }, []);
 
-  return (
-    <h1>Hello, {appeal ?? "..."}!</h1>
-  )
-}
+  return <h1>Hello, {appeal ?? "..."}!</h1>;
+};

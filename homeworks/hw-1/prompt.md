@@ -176,3 +176,21 @@ Adjust the Brief in accord with the following answers for those questions:
 Скорректируй Spec `memory-bank/features/001/spec.md` и Plan `memory-bank/features/001/plan.md`.
 
 Помимо oxlint и oxfmt, необходимо также установить пакет oxlint-tsgolint. Он нужен для работе type-aware линтера.
+
+## Implementation
+### Prompt #31
+Ты principal developer работающий по SDD.
+Реализуй по спеке `memory-bank/features/001/spec.md` в соответствие с планом `memory-bank/features/001/plan.md`.
+
+## Verify
+### Prompt #32 - см. файл .ai-setup/prompts/deep-code-review.md
+
+### Prompt #33
+Исправить замечания:
+  1. [P1-003] + [P1-004] — Исправить логику NODE_ENV и добавить его в dev-скрипт. Это блокирует безопасный деплой.
+  2. [P1-007] — Добавить "лишние" правила из oxlint.config.ts в спеку. Это закрывает Feature 001.                                                                         
+  3. [P1-001] — Добавить error handling в fetchAppeal (try/catch + res.ok). Это блокирует подключение реальных данных.                                                                     
+  4. [P1-002] — Выключить non-null assertion проверку в `frontend.tsx`.tsx.                                                                                                              
+  5. [P1-006] — Игнорировать - будет сделано в отдельном задании
+  6. [P1-008] — Игнорировать - это sample endpoint, будет удален при добавлении первой реально фичи
+  7. [P1-005] — Зафиксировать @types/bun версию. Один символ в package.json. 

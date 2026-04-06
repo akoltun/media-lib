@@ -1,5 +1,5 @@
-import { homeApi } from "../domains/home/api"
+import { homeApi } from "../domains/home/api";
 
 export const apiRoutes = {
   ...homeApi,
-}
+};

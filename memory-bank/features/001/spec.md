@@ -32,7 +32,7 @@ bun add -d oxlint oxfmt oxlint-tsgolint
 Создать файл `oxlint.config.ts` в корне проекта:
 
 ```typescript
-import { defineConfig } from "oxlint"
+import { defineConfig } from "oxlint";
 
 export default defineConfig({
   options: {
@@ -42,7 +42,7 @@ export default defineConfig({
     correctness: "error",
     perf: "error",
     style: "error",
-    suspicious: "warn"
+    suspicious: "warn",
   },
   env: {
     browser: true,
@@ -69,11 +69,7 @@ export default defineConfig({
     "typescript/prefer-optional-chain": "warn",
     "typescript/switch-exhaustiveness-check": "error",
   },
-  ignorePatterns: [
-    "**",
-    "!src/**",
-    "!tests/**",
-  ],
+  ignorePatterns: ["**", "!src/**", "!tests/**"],
   overrides: [
     {
       files: ["src/**/*.tsx", "src/**/*.jsx"],
@@ -87,7 +83,7 @@ export default defineConfig({
       plugins: ["vitest"],
     },
   ],
-})
+});
 ```
 
 - Охватываемые расширения: `.js`, `.mjs`, `.cjs`, `.ts`, `.mts`, `.cts`, `.jsx`, `.tsx`
@@ -104,7 +100,7 @@ export default defineConfig({
 Создать файл `oxfmt.config.ts` в корне проекта:
 
 ```typescript
-import { defineConfig } from "oxfmt"
+import { defineConfig } from "oxfmt";
 
 export default defineConfig({
   printWidth: 120,
@@ -116,13 +112,8 @@ export default defineConfig({
   arrowParens: "avoid",
   organizeImports: true,
   sortPackageJson: true,
-  ignorePatterns: [
-    ".*/**",
-    "homeworks/**",
-    "node_modules/**",
-    "dist/**",
-  ],
-})
+  ignorePatterns: [".*/**", "homeworks/**", "node_modules/**", "dist/**"],
+});
 ```
 
 - Охватываемые расширения: `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, `.jsonc`, `.json5`, `.yaml`, `.toml`, `.html`, `.css`, `.scss`, `.less`, `.md`, `.mdx`
@@ -152,11 +143,11 @@ c. Повторять шаги a–b до тех пор, пока `bun run lint`
 
 ## Изменяемые файлы
 
-| Файл | Действие |
-|------|----------|
-| `package.json` | Добавить скрипт `lint`, добавить `oxlint`, `oxfmt` и `oxlint-tsgolint` в `devDependencies` |
-| `oxlint.config.ts` | Создать — конфигурация Oxlint |
-| `oxfmt.config.ts` | Создать — конфигурация Oxfmt |
+| Файл               | Действие                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| `package.json`     | Добавить скрипт `lint`, добавить `oxlint`, `oxfmt` и `oxlint-tsgolint` в `devDependencies` |
+| `oxlint.config.ts` | Создать — конфигурация Oxlint                                                              |
+| `oxfmt.config.ts`  | Создать — конфигурация Oxfmt                                                               |
 
 ---
 

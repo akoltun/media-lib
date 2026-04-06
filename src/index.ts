@@ -1,17 +1,17 @@
-import { serve } from "bun"
-import index from "./index.html"
-import { apiRoutes } from "./app/api-routes"
+import { apiRoutes } from "./app/api-routes";
+import index from "./index.html";
+import { serve } from "bun";
 
 const server = serve({
+  development: process.env.NODE_ENV === "development" && {
+    console: true,
+    hmr: true,
+  },
+
   routes: {
     "/*": index,
     ...apiRoutes,
   },
+});
 
-  development: process.env.NODE_ENV !== "production" && {
-    hmr: true,
-    console: true,
-  },
-})
-
-console.log(`Server running at ${server.url}`)
+console.log(`Server running at ${server.url}`);
