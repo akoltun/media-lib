@@ -3,3 +3,5 @@ env = "BUN_PUBLIC_*"
 
 [test]
 root = "src"
+coverage = true
+coverageThreshold = 0.8
