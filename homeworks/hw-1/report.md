@@ -41,7 +41,7 @@ Time spent:
  - Brief: 30m
  - Spec: 2h
  - Plan: 10m
- - Implementation: 
+ - Implementation: 1h
 
 Problems:
   - Опять ревью Брифа зациклилось. То просит детализировать содержимое README, а затем просит убрать детализацию
